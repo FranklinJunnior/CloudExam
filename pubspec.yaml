@@ -71,7 +71,6 @@ flutter:
     - assets/18.mp4
     - assets/19.mp4
     - assets/20.mp4
-    - assets/21.mp4
 
 
   uses-material-design: true

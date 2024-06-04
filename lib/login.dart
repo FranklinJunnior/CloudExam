@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:project/home.dart';  // Importar HomePage
+import 'home.dart';  // Importar HomePage
 
 class LoginPage extends StatefulWidget {
   @override
@@ -34,10 +34,28 @@ class _LoginPageState extends State<LoginPage> {
           SnackBar(content: Text(responseData['message'])),
         );
 
-        // Navegar a la página Home después de un login exitoso
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+        // Mostrar el AlertDialog con el mensaje de bienvenida
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Bienvenido'),
+              content: Text('Disfruta de los videos. Puedes cambiar de video si gustas con la flecha.'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(); // Cerrar el AlertDialog
+                    // Navegar a la página Home después de hacer clic en el botón "Iniciar"
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage(email: correo)),
+                    );
+                  },
+                  child: Text('Iniciar'),
+                ),
+              ],
+            );
+          },
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
